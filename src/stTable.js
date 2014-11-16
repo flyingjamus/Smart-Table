@@ -56,6 +56,11 @@ ng.module('smart-table')
          */
         this.sortBy = function sortBy(predicate, reverse) {
             tableState.sort.predicate = predicate;
+            if (typeof predicate == 'function') {
+                tableState.sort.predicateString = predicate.toString();
+            } else {
+                delete tableState.sort.predicateString;
+            }
             tableState.sort.reverse = reverse === true;
             tableState.pagination.start = 0;
             this.pipe();
